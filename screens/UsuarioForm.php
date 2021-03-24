@@ -1,6 +1,4 @@
 <?php
-
-include "./header.php";
 include '../database/bd.php';
 
 $objBD = new bd();
@@ -31,7 +29,3 @@ if (!empty($_POST['nome'])) {
     <input type="submit" value="Salvar">
     <a href="./UsuarioList.php">Voltar</a>
 </form>
-
-<?php
-include "./footer.php";
-?>

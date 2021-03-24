@@ -27,11 +27,13 @@ class bd
     public function select()
     {
         $conn = $this->connection();
-        $stmt = $conn->prepare("SELECT * FROM tb_usuario order by id");
+
+        $stmt = $conn->prepare("SELECT * FROM tb_usuario");
+
         $stmt->execute();
+
         return $stmt;
     }
-
 
     public function insert($dados)
     {

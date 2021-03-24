@@ -1,9 +1,16 @@
-<?php
-include "./screens/header.php";
-?>
-<h1>Tela Inicial</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<a href="./screens/UsuarioList.php">Usuário</a>
-<?php
-include "./screens/footer.php";
-?>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <H4>Telas</H4>
+    <a href="./screens/UsuarioList.php">Usuário</a>
+</body>
+
+</html>
