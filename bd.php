@@ -1,0 +1,26 @@
+<?php
+
+class bd
+{
+
+    private $bd_tipo = "mysql";
+    private $bd_host = "localhost";
+    private $bd_nome = "db_tai_aula_2021";
+    private $bd_porta = "3306";
+    private $bd_usuario = "root";
+    private $bd_senha = "";
+    private $bd_charset = "utf8mb4";
+
+    public function connection()
+    {
+        $str_conn = $this->bd_tipo . ":host=" . $this->bd_host .
+            ";dbname=" . $this->bd_nome . ";port=" . $this->bd_porta;
+
+        return new PDO(
+            $str_conn,
+            $this->bd_usuario,
+            $this->bd_senha,
+            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $this->bd_charset)
+        );
+    }
+}
