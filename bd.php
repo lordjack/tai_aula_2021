@@ -23,4 +23,30 @@ class bd
             array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $this->bd_charset)
         );
     }
+
+    public function insert($dados)
+    {
+        $sql = "INSERT INTO tb_usuario (nome, telefone, cpf) VALUES (";
+
+        $flag = 0;
+        $arrayValor = [];
+        foreach ($dados as $valor) {
+
+            if ($flag == 0) {
+                $sql .= " ?";
+            } else {
+                $sql .= ", ?";
+            }
+            $flag = 1;
+            $arrayValor[] = $valor;
+        }
+        $sql .= ");";
+        $conn = $this->connection();
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->execute($arrayValor);
+
+        return $stmt;
+    }
 }
