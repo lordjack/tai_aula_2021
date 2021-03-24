@@ -24,6 +24,15 @@ class bd
         );
     }
 
+    public function select()
+    {
+        $conn = $this->connection();
+        $stmt = $conn->prepare("SELECT * FROM tb_usuario order by id");
+        $stmt->execute();
+        return $stmt;
+    }
+
+
     public function insert($dados)
     {
         $sql = "INSERT INTO tb_usuario (nome, telefone, cpf) VALUES (";
