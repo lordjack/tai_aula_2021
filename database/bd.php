@@ -100,4 +100,14 @@ class bd
 
         return $stmt;
     }
+    public function remove($id)
+    {
+        $conn = $this->connection();
+
+        $stmt = $conn->prepare("DELETE FROM tb_usuario WHERE id = ?;");
+
+        $stmt->execute([$id]);
+
+        return $stmt;
+    }
 }

@@ -5,6 +5,12 @@ $objBD = new bd();
 $result = $objBD->select();
 //select * from tb_usuario
 
+if (!empty($_GET['id'])) {
+    $objBD->remove($_GET['id']);
+
+    header("location:UsuarioList.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +42,7 @@ $result = $objBD->select();
             <td>" . $item->telefone . "</td>
             <td>" . $item->cpf . "</td>
             <td><a href='UsuarioForm.php?id=" . $item->id . "'>Editar</a></td>
+            <td><a href='UsuarioList.php?id=" . $item->id . "' onclick=\"return confirm('Deseja realmente remover o registro?') \">Remover</a></a></td>
         </tr>
         ";
         }
