@@ -35,6 +35,46 @@ class bd
         return $stmt;
     }
 
+    public function find($id)
+    {
+        $conn = $this->connection();
+
+        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE id = ?;");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetchObject();
+    }
+
+    public function update($dados)
+    {
+        $id = $dados['id'];
+
+        $sql = "UPDATE tb_usuario SET ";
+
+        $flag = 0;
+        $arrayValue = [];
+        foreach ($dados as $campo => $valor) {
+            if ($flag == 0) {
+                $sql .= "$campo = ? ";
+            } else {
+                $sql .= ", $campo = ?";
+            }
+
+            $flag = 1;
+            $arrayValue[] = $valor;
+        }
+
+        $sql .= " WHERE id= $id;";
+
+        $conn = $this->connection();
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($arrayValue);
+
+        return $stmt;
+    }
+
     public function insert($dados)
     {
         $sql = "INSERT INTO tb_usuario (nome, telefone, cpf) VALUES (";

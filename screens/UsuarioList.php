@@ -35,6 +35,7 @@ $result = $objBD->select();
             <td>" . $item->nome . "</td>
             <td>" . $item->telefone . "</td>
             <td>" . $item->cpf . "</td>
+            <td><a href='UsuarioForm.php?id=" . $item->id . "'>Editar</a></td>
         </tr>
         ";
         }
