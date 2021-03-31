@@ -2,19 +2,8 @@
 include '../database/bd.php';
 
 $objBD = new bd();
+$result = $objBD->select();
 //select * from tb_usuario
-
-if (!empty($_POST['nome'])) {
-    $result = $objBD->search($_POST);
-} else {
-    $result = $objBD->select();
-}
-
-if (!empty($_GET['id'])) {
-    $objBD->remove($_GET['id']);
-
-    header("location:UsuarioList.php");
-}
 
 ?>
 <!DOCTYPE html>
@@ -30,12 +19,6 @@ if (!empty($_GET['id'])) {
 <body>
 
     <h4>Listagem de Usuários</h4>
-    <form action="UsuarioList.php" method="POST">
-
-        <input type="text" name="nome" placeholder="Pesquisar Nome" />
-        <input type="submit" value="Buscar">
-
-    </form>
     <a href="../index.php">Voltar</a>
     <a href="./UsuarioForm.php">Cadastrar</a>
     <table>
@@ -43,6 +26,7 @@ if (!empty($_GET['id'])) {
         <th>Nome</th>
         <th>Telefone</th>
         <th>CPF</th>
+        <th>Ação</th>
         <?php
         foreach ($result as $item) {
             $item = (object) $item;
@@ -52,8 +36,7 @@ if (!empty($_GET['id'])) {
             <td>" . $item->nome . "</td>
             <td>" . $item->telefone . "</td>
             <td>" . $item->cpf . "</td>
-            <td><a href='UsuarioForm.php?id=" . $item->id . "'>Editar</a></td>
-            <td><a href='UsuarioList.php?id=" . $item->id . "' onclick=\"return confirm('Deseja realmente remover o registro?') \">Remover</a></a></td>
+            <td><a href='UsuarioForm.php?id=" . $item->id . "' >Editar</a> </td>
         </tr>
         ";
         }
