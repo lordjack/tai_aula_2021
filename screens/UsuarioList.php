@@ -26,6 +26,7 @@ $result = $objBD->select();
         <th>Nome</th>
         <th>Telefone</th>
         <th>CPF</th>
+        <th>Ação</th>
         <?php
         foreach ($result as $item) {
             $item = (object) $item;
@@ -35,6 +36,7 @@ $result = $objBD->select();
             <td>" . $item->nome . "</td>
             <td>" . $item->telefone . "</td>
             <td>" . $item->cpf . "</td>
+            <td><a href='UsuarioForm.php?id=" . $item->id . "' >Editar</a> </td>
         </tr>
         ";
         }
