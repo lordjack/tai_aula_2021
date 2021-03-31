@@ -46,37 +46,39 @@ class bd
         return $stmt->fetchObject();
     }
 
+    //UPDATE `tb_usuario` SET `nome`='Lucas', `telefone`='49 8899-8800', `cpf`='000.555.999-55' WHERE  `id`=5;
     public function update($dados)
     {
         $id = $dados['id'];
-
         $sql = "UPDATE tb_usuario SET ";
 
         $flag = 0;
-        $arrayValue = [];
+        $arrayValor = [];
         foreach ($dados as $campo => $valor) {
+
             if ($flag == 0) {
-                $sql .= "$campo = ? ";
+                $sql .= " $campo = ?";
             } else {
                 $sql .= ", $campo = ?";
             }
-
             $flag = 1;
-            $arrayValue[] = $valor;
+            $arrayValor[] = $valor;
         }
 
-        $sql .= " WHERE id= $id;";
+        $sql .= " WHERE id = $id;";
 
         $conn = $this->connection();
 
         $stmt = $conn->prepare($sql);
-        $stmt->execute($arrayValue);
+
+        $stmt->execute($arrayValor);
 
         return $stmt;
     }
 
     public function insert($dados)
     {
+        unset($dados['id']); //remove o atributo id do vetor
         $sql = "INSERT INTO tb_usuario (nome, telefone, cpf) VALUES (";
 
         $flag = 0;
@@ -98,26 +100,6 @@ class bd
 
         $stmt->execute($arrayValor);
 
-        return $stmt;
-    }
-    public function remove($id)
-    {
-        $conn = $this->connection();
-
-        $stmt = $conn->prepare("DELETE FROM tb_usuario WHERE id = ?;");
-
-        $stmt->execute([$id]);
-
-        return $stmt;
-    }
-
-    public function search($dados)
-    {
-        $conn = $this->connection();
-
-        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE nome LIKE ?;");
-
-        $stmt->execute(["%" . $dados['nome'] . "%"]);
         return $stmt;
     }
 }
