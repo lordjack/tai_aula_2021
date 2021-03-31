@@ -2,8 +2,13 @@
 include '../database/bd.php';
 
 $objBD = new bd();
-$result = $objBD->select();
 //select * from tb_usuario
+
+if (!empty($_POST['nome'])) {
+    $result = $objBD->search($_POST);
+} else {
+    $result = $objBD->select();
+}
 
 if (!empty($_GET['id'])) {
     $objBD->remove($_GET['id']);
@@ -25,6 +30,12 @@ if (!empty($_GET['id'])) {
 <body>
 
     <h4>Listagem de Usuários</h4>
+    <form action="UsuarioList.php" method="POST">
+
+        <input type="text" name="nome" placeholder="Pesquisar Nome" />
+        <input type="submit" value="Buscar">
+
+    </form>
     <a href="../index.php">Voltar</a>
     <a href="./UsuarioForm.php">Cadastrar</a>
     <table>

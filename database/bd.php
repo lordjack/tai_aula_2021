@@ -110,4 +110,14 @@ class bd
 
         return $stmt;
     }
+
+    public function search($dados)
+    {
+        $conn = $this->connection();
+
+        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE nome LIKE ?;");
+
+        $stmt->execute(["%" . $dados['nome'] . "%"]);
+        return $stmt;
+    }
 }
