@@ -102,4 +102,27 @@ class bd
 
         return $stmt;
     }
+
+    public function remove($id)
+    {
+        $conn = $this->connection();
+
+        $stmt = $conn->prepare("DELETE FROM tb_usuario WHERE id = ?;");
+
+        $stmt->execute([$id]);
+
+        return $stmt;
+    }
+
+    public function search($dados)
+    {
+        $conn = $this->connection();
+        $campo = $dados['tipo'];
+
+        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE $campo like ?;");
+
+        $stmt->execute(["%" . $dados['valor'] . "%"]);
+
+        return $stmt;
+    }
 }
