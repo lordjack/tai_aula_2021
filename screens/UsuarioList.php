@@ -61,8 +61,8 @@ include "./head.php";
             <td>" . $item->nome . "</td>
             <td>" . $item->telefone . "</td>
             <td>" . $item->cpf . "</td>
-            <td><a href='UsuarioForm.php?id=" . $item->id . "' style='color:orange;'><i class='fas fa-edit'></i></a> </td>
-            <td><a href='UsuarioList.php?id=" . $item->id . "' onclick=\"return confirm('Deseja realmente remover o registro?'); \"  style='color:red;' ><i class='fas fa-trash'></i></a> </td>
+            <td><a href='UsuarioForm.php?id=" . $item->id . "' style='color:orange;' ><i class='fas fa-edit'></i></a> </td>
+            <td><a href='UsuarioList.php?id=" . $item->id . "' onclick=\"return confirm('Deseja realmente remover o registro?'); \" style='color:red;'><i class='fas fa-trash'></i></a> </td>
         </tr>
         ";
         }
