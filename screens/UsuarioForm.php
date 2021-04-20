@@ -48,6 +48,8 @@ include "./head.php";
                 foreach ($resultCategoria as $item) {
                     $item = (object) $item;
 
+                    $selected = $item->id === $result->categoria_id ? "selected" : "";
+
                     echo " <option value=" . $item->id . " $selected>" . $item->nome . "</option>";
                 }
                 ?>
