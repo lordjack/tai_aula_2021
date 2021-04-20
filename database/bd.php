@@ -24,11 +24,11 @@ class bd
         );
     }
 
-    public function select()
+    public function select($nome_tabela)
     {
         $conn = $this->connection();
 
-        $stmt = $conn->prepare("SELECT * FROM tb_usuario");
+        $stmt = $conn->prepare("SELECT * FROM $nome_tabela");
 
         $stmt->execute();
 

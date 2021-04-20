@@ -3,12 +3,14 @@ include '../database/bd.php';
 
 $objBD = new bd();
 
+$resultCategoria = $objBD->select("tb_categoria");
+
 if (!empty($_POST['nome'])) {
 
     if (!empty($_POST['id'])) {
-        $objBD->update($dados);
+        $objBD->update($_POST);
     } else {
-        $objBD->insert($dados);
+        $objBD->insert($_POST);
     }
 
     header("location:UsuarioList.php");
@@ -34,17 +36,26 @@ include "./head.php";
             <input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo !empty($result->cpf) ? $result->cpf : "" ?>" required placeholder="000.555.000-55"><br>
         </div>
 
-        <label for="">Nome</label>
-        <input type="text" name="nome" id="" value="<?php echo !empty($result->nome) ? $result->nome : "" ?>" required><br>
+        <div class="form-group col-md-2">
+            <label for="telefone">Telefone</label>
+            <input type="text" name="telefone" id="telefone" class="form-control" value="<?php echo !empty($result->telefone) ? $result->telefone : "" ?>" required placeholder="(84) 98800-5500)"><br>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="categoria_id">Categoria</label>
+            <select class="custom-select" id="categoria_id" name="categoria_id">
+                <?php
+                foreach ($resultCategoria as $item) {
+                    $item = (object) $item;
 
-        <label for="">Telefone</label>
-        <input type="text" name="telefone" id="" value="<?php echo !empty($result->telefone) ? $result->telefone : "" ?>" required><br>
+                    echo " <option value=" . $item->id . " $selected>" . $item->nome . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
 
-        <label for="">CPF</label>
-        <input type="text" name="cpf" id="" value="<?php echo !empty($result->cpf) ? $result->cpf : "" ?>" required><br>
-
-        <button type="submit" class="btn btn-success"> <i class="fas fa-save"></i> Salvar</button>
-        <a href="./UsuarioList.php" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Voltar</a>
+    <button type="submit" class="btn btn-success"> <i class="fas fa-save"></i> Salvar</button>
+    <a href="./UsuarioList.php" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Voltar</a>
 </form>
 <?php
 include "./footer.php";
