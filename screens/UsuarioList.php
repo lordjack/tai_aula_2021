@@ -2,16 +2,16 @@
 include '../database/bd.php';
 
 $objBD = new bd();
-
+$tabela = "tb_usuario";
 if (!empty($_POST['valor'])) {
-    $result = $objBD->search($_POST);
+    $result = $objBD->search($tabela, $_POST);
 } else {
     //select * from tb_usuario
-    $result = $objBD->select();
+    $result = $objBD->select($tabela);
 }
 
 if (!empty($_GET['id'])) {
-    $objBD->remove($_GET['id']);
+    $objBD->remove($tabela, $_GET['id']);
     header("location:UsuarioList.php");
 }
 

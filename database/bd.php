@@ -35,11 +35,11 @@ class bd
         return $stmt;
     }
 
-    public function find($id)
+    public function find($nome_tabela, $id)
     {
         $conn = $this->connection();
 
-        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE id = ?;");
+        $stmt = $conn->prepare("SELECT * FROM $nome_tabela WHERE id = ?;");
 
         $stmt->execute([$id]);
 
@@ -47,10 +47,10 @@ class bd
     }
 
     //UPDATE `tb_usuario` SET `nome`='Lucas', `telefone`='49 8899-8800', `cpf`='000.555.999-55' WHERE  `id`=5;
-    public function update($dados)
+    public function update($nome_tabela, $dados)
     {
         $id = $dados['id'];
-        $sql = "UPDATE tb_usuario SET ";
+        $sql = "UPDATE $nome_tabela SET ";
 
         $flag = 0;
         $arrayValor = [];
@@ -76,10 +76,22 @@ class bd
         return $stmt;
     }
 
-    public function insert($dados)
+    public function insert($nome_tabela, $dados)
     {
         unset($dados['id']); //remove o atributo id do vetor
-        $sql = "INSERT INTO tb_usuario (nome, telefone, cpf) VALUES (";
+        $sql = "INSERT INTO $nome_tabela (";
+
+        $flag = 0;
+        foreach ($dados as $campo => $valor) {
+
+            if ($flag == 0) {
+                $sql .= " $campo";
+            } else {
+                $sql .= ", $campo";
+            }
+            $flag = 1;
+        }
+        $sql .= ") VALUES (";
 
         $flag = 0;
         $arrayValor = [];
@@ -103,23 +115,23 @@ class bd
         return $stmt;
     }
 
-    public function remove($id)
+    public function remove($nome_tabela, $id)
     {
         $conn = $this->connection();
 
-        $stmt = $conn->prepare("DELETE FROM tb_usuario WHERE id = ?;");
+        $stmt = $conn->prepare("DELETE FROM $nome_tabela WHERE id = ?;");
 
         $stmt->execute([$id]);
 
         return $stmt;
     }
 
-    public function search($dados)
+    public function search($nome_tabela, $dados)
     {
         $conn = $this->connection();
         $campo = $dados['tipo'];
 
-        $stmt = $conn->prepare("SELECT * FROM tb_usuario WHERE $campo like ?;");
+        $stmt = $conn->prepare("SELECT * FROM $nome_tabela WHERE $campo like ?;");
 
         $stmt->execute(["%" . $dados['valor'] . "%"]);
 

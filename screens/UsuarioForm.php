@@ -3,19 +3,20 @@ include '../database/bd.php';
 
 $objBD = new bd();
 
+$tabela = "tb_usuario";
 $resultCategoria = $objBD->select("tb_categoria");
 
 if (!empty($_POST['nome'])) {
 
     if (!empty($_POST['id'])) {
-        $objBD->update($_POST);
+        $objBD->update($tabela, $_POST);
     } else {
-        $objBD->insert($_POST);
+        $objBD->insert($tabela, $_POST);
     }
 
     header("location:UsuarioList.php");
 } elseif (!empty($_GET['id'])) {
-    $result = $objBD->find($_GET['id']);
+    $result = $objBD->find($tabela, $_GET['id']);
 }
 ?>
 
