@@ -13,6 +13,11 @@
     <title>Sis Ger</title>
 </head>
 
+<?php
+$dir_projeto = "/tai_aula_2021";
+$url_projeto = "http://" . $_SERVER['SERVER_NAME'] . $dir_projeto;
+?>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Sis Ger</a>
@@ -23,10 +28,13 @@
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../index.php">Início <span class="sr-only">(página atual)</span></a>
+                    <a class="nav-link" href="<?php echo $url_projeto; ?>/index.php">Início <span class="sr-only">(página atual)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./screens/UsuarioList.php">Usuários</a>
+                    <a class="nav-link" href="<?php echo $url_projeto; ?>/screens/UsuarioList.php">Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $url_projeto; ?>/screens/ProdutoList.php">Produto</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Desativado</a>
