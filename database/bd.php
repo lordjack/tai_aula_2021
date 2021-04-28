@@ -93,6 +93,7 @@ class bd
         }
         $sql .= ") VALUES (";
 
+
         $flag = 0;
         $arrayValor = [];
         foreach ($dados as $valor) {
@@ -107,6 +108,10 @@ class bd
         }
         $sql .= ");";
         $conn = $this->connection();
+
+        var_dump($dados);
+        var_dump($sql);
+        // exit;
 
         $stmt = $conn->prepare($sql);
 

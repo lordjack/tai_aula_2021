@@ -47,6 +47,8 @@ include "./head.php";
             <th scope="col">Nome</th>
             <th scope="col">Telefone</th>
             <th scope="col">CPF</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Data Nascimento</th>
             <th scope="col">Categoria</th>
             <th scope="col">Ação</th>
             <th scope="col">Ação</th>
@@ -62,8 +64,10 @@ include "./head.php";
         <tr>
             <th scope='row'>" . $item->id . "</th> 
             <td>" . $item->nome . "</td>
-            <td>" . $item->telefone . "</td>
+            <td><a href='tel:" . $item->telefone . "'>" . $item->telefone . "</a></td>
             <td>" . $item->cpf . "</td>
+            <td><a href='mailto:" . $item->email . "'>" . $item->email . "</a></td>
+            <td>" .  date_format(date_create($item->data_nascimento), 'd/m/Y') . "</td>
             <td>" . $resultCategoria->nome . "</td>
             <td><a href='UsuarioForm.php?id=" . $item->id . "' style='color:orange;' ><i class='fas fa-edit'></i></a> </td>
             <td><a href='UsuarioList.php?id=" . $item->id . "' onclick=\"return confirm('Deseja realmente remover o registro?'); \" style='color:red;'><i class='fas fa-trash'></i></a> </td>

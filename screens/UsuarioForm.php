@@ -11,6 +11,7 @@ if (!empty($_POST['nome'])) {
     if (!empty($_POST['id'])) {
         $objBD->update($tabela, $_POST);
     } else {
+
         $objBD->insert($tabela, $_POST);
     }
 
@@ -40,6 +41,14 @@ include "./head.php";
         <div class="form-group col-md-2">
             <label for="telefone">Telefone</label>
             <input type="text" name="telefone" id="telefone" class="form-control" value="<?php echo !empty($result->telefone) ? $result->telefone : "" ?>" required placeholder="(84) 98800-5500)"><br>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" class="form-control" value="<?php echo !empty($result->email) ? $result->email : "" ?>" required placeholder="exemplo@gmail.com"><br>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="data_nascimento">Data Nascimento</label>
+            <input type="date" name="data_nascimento" id="data_nascimento" class="form-control" value="<?php echo !empty($result->data_nascimento) ? $result->data_nascimento : "" ?>" required placeholder="00/00/2000"><br>
         </div>
         <div class="form-group col-md-3">
             <label for="categoria_id">Categoria</label>
