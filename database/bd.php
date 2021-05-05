@@ -135,4 +135,17 @@ class bd
 
         return $stmt;
     }
+
+
+    public function logar($login, $senha)
+    {
+        $nome_tabela = "tb_usuario";
+        $conn = $this->connection();
+
+        $stmt = $conn->prepare("SELECT * FROM $nome_tabela WHERE login = ? AND senha = ? AND ativo = 1;");
+
+        $stmt->execute([$login, $senha]);
+
+        return $stmt->fetchObject();
+    }
 }
