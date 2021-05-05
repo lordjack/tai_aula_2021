@@ -66,6 +66,38 @@ include "./head.php";
         </div>
     </div>
 
+    <blockquote class="blockquote">
+        <p class="mb-0">Credenciais do Login</p>
+    </blockquote>
+
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label for="login">Login</label>
+            <input type="text" name="login" id="login" class="form-control" value="<?php echo !empty($result->login) ? $result->login : "" ?>" required placeholder="usuario"><br>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" class="form-control" value="<?php echo !empty($result->senha) ? $result->senha : "" ?>" required placeholder="******"><br>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="ativo"> Habilitar/Desabilitar</label>
+            <select class="custom-select" id="ativo" name="ativo">
+                <?php
+
+                $ativo = [0 => "Inativo", 1 => "Ativado"];
+                foreach ($ativo as $chave => $item) {
+
+                    $selected = !empty($result->ativo) ? "selected" : "";
+
+                    echo " <option value=" . $chave . " $selected>" . $item . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+
+
+
     <button type="submit" class="btn btn-success"> <i class="fas fa-save"></i> Salvar</button>
     <a href="./UsuarioList.php" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Voltar</a>
 </form>
