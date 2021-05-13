@@ -2,6 +2,8 @@
 include "../database/bd.php";
 include "./head.php";
 
+session_start();
+
 $_SESSION['usuario'] = null;
 
 $obj = new bd();
@@ -13,7 +15,7 @@ if (!empty($_POST)) {
     //exit;
     if (!empty($objUsuario)) {
         $_SESSION['usuario'] = $objUsuario;
-        header("Location: ./UsuarioList.php");
+        header("Location: ./principal.php");
     } else {
         echo "<p style='color:red;'>Login ou Senha errado, tente novamente!</p>";
     }

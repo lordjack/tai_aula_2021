@@ -1,5 +1,8 @@
 <?php
 include '../database/bd.php';
+include '../Util.php';
+
+verificarLogin();
 
 $objBD = new bd();
 

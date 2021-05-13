@@ -41,6 +41,7 @@ $url_projeto = "http://" . $_SERVER['SERVER_NAME'] . $dir_projeto;
                     <a class="nav-link disabled" href="#">Desativado</a>
                 </li>
             </ul>
+            <a class="btn btn-outline-warning" href="./LoginForm.php">Sair</a>
         </div>
     </nav>
     <div class="container">
