@@ -47,6 +47,7 @@ include "./head.php";
     <thead>
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">Imagem</th>
             <th scope="col">Nome</th>
             <th scope="col">Valor Unitário</th>
             <th scope="col">Tipo</th>
@@ -56,12 +57,19 @@ include "./head.php";
     </thead>
     <tbody>
         <?php
+
         foreach ($result as $item) {
             $item = (object) $item;
 
+            if (!empty($item->nome_arquivo) && file_exists(dirname(dirname(__FILE__)) . "/uploads/" . $item->nome_arquivo)) {
+                $nome_arquivo =  $url_projeto . "/uploads/" . $item->nome_arquivo;
+            } else {
+                $nome_arquivo = $url_projeto . "/uploads/sem_imagem.jpg";
+            }
             echo "
         <tr>
             <th scope='row'>" . $item->id . "</th> 
+            <td><img class='card-img-top' src='" . $nome_arquivo . "' alt='imagem Produto' style='width: 150px;height: 150px;max-width: 100%;'></td>
             <td>" . $item->nome . "</td>
             <td>" . $item->valor_unitario . "</td>
             <td>" . $item->tipo . "</td>
