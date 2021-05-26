@@ -10,11 +10,7 @@ $tabela = "tb_produto";
 
 if (!empty($_POST['nome'])) {
 
-    var_dump($_POST);
-
-    var_dump($_FILES["nome_arquivo"]["name"]);
-
-    if (!empty($_FILES["nome_arquivo"])) {
+    if (!empty($_FILES["nome_arquivo"]["name"])) {
         $nome_arquivo = uploadImagem($_FILES["nome_arquivo"]);
 
         $_POST["nome_arquivo"] = $nome_arquivo;
@@ -66,8 +62,19 @@ include "./head.php";
                 ?>
             </select>
         </div>
+        <?php
+        // var_dump(file_exists(dirname(dirname(__FILE__)) . "/uploads/" . $result->nome_arquivo));
+        // var_dump($url_projeto);
+        //  exit;
+        if (!empty($result->nome_arquivo) && file_exists(dirname(dirname(__FILE__)) . "/uploads/" . $result->nome_arquivo)) {
+            $nome_arquivo =  $url_projeto . "/uploads/" . $result->nome_arquivo;
+        } else {
+            $nome_arquivo = $url_projeto . "/uploads/sem_imagem.jpg";
+        }
+        ?>
 
-        <div class="form-group col-md-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="<?php echo $nome_arquivo ?>" alt="imagem Produto">
             <label for="nome_arquivo">Arquivo</label>
             <input type="file" name="nome_arquivo" id="nome_arquivo" class="form-control" value="<?php echo !empty($result->nome_arquivo) ? $result->nome_arquivo : "" ?>"><br>
         </div>
